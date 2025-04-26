@@ -9,7 +9,7 @@ class ProductoViewSet(viewsets.ModelViewSet):
     serializer_class = ProductoSerializer
     permission_classes = [permissions.AllowAny]
 
-class CategoriaViewSet(viewsets.ReadOnlyModelViewSet):
+class CategoriaViewSet(viewsets.ModelViewSet):
     queryset = Categoria.objects.all()
     serializer_class = CategoriaSerializer
     permission_classes = [permissions.AllowAny]

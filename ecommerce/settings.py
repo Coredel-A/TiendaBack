@@ -52,10 +52,11 @@ INSTALLED_APPS = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         # Para el sistema de tokens incorporado:
-        'rest_framework.authentication.TokenAuthentication',
+        #'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
         # O para JWT:
         # 'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ],
+    ],   
 }
 
 MIDDLEWARE = [

@@ -9,7 +9,7 @@ class Usuario(models.Model):
         ('suspendido','Suspendido')
     ]
     nombre = models.CharField(max_length=100, default='Desconocido')
-    email = models.EmailField()    
+    email = models.EmailField(unique=True)    
     telefono = models.CharField(max_length=15, blank=True, null=True)
     password = models.CharField(max_length=128)
     estado = models.CharField(max_length=20, choices=ESTADOS, default='activo')
