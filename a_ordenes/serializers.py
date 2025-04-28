@@ -24,15 +24,29 @@ class OrdenSerializer(serializers.ModelSerializer):
     class Meta:
         model = Orden
         fields = [
-            'id','usuario','ususario_id','fecha_creacion','estado',
+            'id','usuario','usuario_id','fecha_creacion','estado',
             'tipo_envio','forma_pago','total','seguimiento','detalles'
         ]
     
     def create(self, validated_data):
         detalles_data = validated_data.pop('detalles')
+        
+        # Inicializamos el total en 0
+        total = 0
+
+        # Primero creamos la orden, pero aún no guardamos el total
         orden = Orden.objects.create(**validated_data)
+
         for detalle in detalles_data:
+            cantidad = detalle['cantidad']
+            precio_unitario = detalle['precio_unitario']
+            total += cantidad * precio_unitario
             OrdenDetalle.objects.create(orden=orden, **detalle)
+        
+        # Ahora actualizamos el total
+        orden.total = total
+        orden.save()
+
         return orden
     
     def update(self, instance, validated_data):

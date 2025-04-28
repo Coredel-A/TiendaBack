@@ -22,6 +22,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-4omt=di70q^f60#x+six74&=@&%+#6c@4ld(kp&ap9zi_ekmyd'
 
+# Stripe Settings
+STRIPE_SECRET_KEY = 'sk_test_51RIcIrIg6oHd84jhGMdIlpj9g8tJJ7U7Ql8egEE2udQwPyl6dQBLyCJ8erWSja7RmivKQIVVkJLwW3FhCvKDme0y00iM3S2Y1L'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -40,10 +43,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
+    'django_filters',
     #apps
     'a_usuarios',
     'a_sucursales',
-    'a_empleados',
     'a_productos',
     'a_inventario',
     'a_ordenes',
@@ -108,7 +111,7 @@ DATABASES = {
 
 # User name
 
-AUTH_USER_MODEL = 'a_empleados.Empleado'
+AUTH_USER_MODEL = 'a_usuarios.Usuario'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -150,3 +153,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+import os
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
