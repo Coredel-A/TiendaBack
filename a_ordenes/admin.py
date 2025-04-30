@@ -1,6 +1,5 @@
 from django.contrib import admin
 from .models import Orden, OrdenDetalle
-# Register your models here.
 
 class OrdenDetalleInline(admin.TabularInline):
     model = OrdenDetalle

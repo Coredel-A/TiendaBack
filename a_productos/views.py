@@ -20,16 +20,12 @@ class ProductoViewSet(viewsets.ModelViewSet):
     filterset_class = ProductoFilter
     search_fields = ['nombre', 'descripcion', 'marca', 'modelo']
 
-    # Simplificamos get_queryset para evitar conflictos con SearchFilter
     def get_queryset(self):
         queryset = Producto.objects.all()
-        
-        # Filtro por categoría - dejamos esto porque es importante para filtrar por categoría
         categoria_id = self.request.query_params.get('categoria', None)
         if categoria_id:
             queryset = queryset.filter(categoria_id=categoria_id)
             
-        # Eliminamos el filtro manual por search para que lo maneje SearchFilter
         return queryset
 
 class CategoriaViewSet(viewsets.ModelViewSet):

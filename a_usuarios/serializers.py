@@ -1,13 +1,19 @@
 from rest_framework import serializers
 from django.contrib.auth import authenticate
-from .models import Usuario
+from .models import Usuario, DireccionEnvio
+
+class DireccionEnvioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DireccionEnvio
+        fields = ['id', 'usuario', 'direccion', 'ciudad', 'departamento', 'pais', 'codigo_postal', 'telefono_contacto']
 
 class UsuarioSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=True)
+    direcciones_envio = DireccionEnvioSerializer(many=True, read_only=True)
 
     class Meta:
         model = Usuario
-        fields = ['id', 'nombre', 'email', 'telefono', 'rol', 'puesto', 'sucursal', 'estado', 'fecha_registro', 'password']
+        fields = ['id', 'nombre', 'email', 'telefono', 'rol', 'puesto', 'sucursal', 'estado', 'fecha_registro', 'password', 'direcciones_envio']
 
     def create(self, validated_data):
         password = validated_data.pop('password')
