@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'django_filters',
+    'django_seed',
     #apps
     'a_usuarios',
     'a_sucursales',
